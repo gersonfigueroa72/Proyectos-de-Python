@@ -67,4 +67,3 @@ class fisica:
     def __init__(self, maestro,puntaje_profesor,materia,semestre):
         self.maestro=maestro
 
-        
