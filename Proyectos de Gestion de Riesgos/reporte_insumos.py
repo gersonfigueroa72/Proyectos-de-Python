@@ -53,28 +53,34 @@ df1 = df1[(df1['prodact_producto'] == 'TC') & (df1['prodact_beg_bpp']=='BEG')]
 
 id_clientes = df1['prodact_id_cli'].unique()
 
-#Ahora crearemos una columna con la suma del LME aprobado en USD de cada cliente
+#Ahora crearemos una columna con la suma del saldo aprobado en USD y Q de cada cliente
 
 id_cli = [] 
-suma_lme_aprobado = [] #Suma LME aprob * cliente
+suma_saldo_usd = [] #Suma saldo * cliente
+suma_saldo_gtq = []
+
 for i in id_clientes:
     id_cli.append(i)
-    lme_clientes = df1[df1['prodact_id_cli']==i]
-    suma=lme_clientes['prodact_lme_aprobado_cli_usd'].sum()
-    suma_lme_aprobado.append(suma)
+    saldo_clientes = df1[df1['prodact_id_cli']==i]
+    suma_usd = saldo_clientes['prodact_saldok_usd'].sum()
+    suma_gtq = saldo_cliente['prodact_saldok_gtq'].sum()
+    suma_saldo_usd.append(suma_usd)
+    suma_saldo_gtq.append(suma_gtq)
 
-lme = pd.DataFrame()
-
-#agregamos id_cli y suma_lme_aprobado a lme
-lme['id_cliente'] = id_cli
-lme['suma_lme_aprobado'] = suma_lme_aprobado
-#print(lme)
+saldo = pd.DataFrame()
+#agregamos id_cli y suma_saldo_usd a saldo
+saldo['id_cliente'] = id_cli
+saldo['suma_saldo_usd'] = suma_saldo_usd
+saldo['suma_saldo_gtq'] = suma_saldo_gtq
+#print(saldo) 
 
 #Ahora vamos a eliminar los clientes repetidos en df1 y eliminamos los datos 
-#de 'prodact_lme_aprobado_cli_usd' y sustituimos por lme['suma_lme_aprobado']
+#de 'prodact_saldok_usd', 'prodact_saldok_gtq'  sustituimos por saldo['suma_saldo_usd'] 
+#saldo[prodact_saldok_gtq] respectivamente
 
 df1 = df1.drop_duplicates(subset=['prodact_id_cli']).reset_index(drop=True)
-df1['prodact_lme_aprobado_cli_usd'] = lme['suma_lme_aprobado']
+df1['prodact_saldok_usd'] = saldo['suma_saldo_usd']
+df1['prodact_saldok_gtq'] = saldo['suma_saldo_gtq']
 #df1 = df1.sort_values(by='prodact_id_grupo', ascending=True)
 df1['prodact_f_venc'] = df1['prodact_f_venc'].replace('NULL', 0)
 
@@ -87,6 +93,7 @@ df = pd.concat([df, df1], axis=0, ignore_index=True)
 '''
 Ahora que terminamos TC, vamos a trabajar con las LC
 '''
+
 #Creamos un nuevo data frame que tiene los mismos datos que df pero solo de LC
 lc = df[df['prodact_linea_credito'].notna()] #unicamente extramos lc
 
@@ -116,6 +123,7 @@ lc['prodact_dias_mora_int'] = lc_dias_mora_max['prodact_dias_mora_int']
 
 #Reemplazamos de lc['prodact_producto] todos los valores a 'LC'
 lc['prodact_producto'] = 'LC'
+lc['prodact_descri_producto'] = 'LINEA DE CREDITO'
 
 #Ahora concatenamos lc a df
 df = pd.concat([df, lc], axis=0, ignore_index=True)
@@ -157,12 +165,44 @@ for idx, i in df['prodact_producto'].items():  # idx = índice, i = valor de la 
         lme = df.loc[idx, 'prodact_lme_aprobado_cli_usd']  # Se usa idx para acceder directamente
         LME_final.append(lme)
     else:
-        lme = df.loc[idx, 'prodact_lme_aprobado_cli_usd'] + df.loc[idx, 'prodact_lme_actual_cli_usd']
+        lme = df.loc[idx, 'prodact_saldok_usd']
         LME_final.append(lme)
 
-df['LME_final'] = LME_final
+df['LME_final'] = LME_final #Acá termina el informe de Insumos
+
+'''
+Ahora creamos el informe para Will
+'''
+garantias = []
+
+#Creamos la columna de garantias
+for i in df['prodact_tipo_garantia']:
+    if i == 1:
+        i = "FIDUCIARIA"
+        garantias.append(i)
+    elif i == 2:
+        i = "HIPOTECARIA"
+        garantias.append(i)
+    elif i == 3:
+        i = "PRENDARIA"
+        garantias.append(i)
+
+#concatenamos las columnas prodact_cod_libro - prodact_libro
+libro = df['prodact_cod_libro'] + '-' + df['prodact_libro']
+df['libro'] = libro
+
+#Extraemos las columnas a utilizar de df
+columnas_a_agregar = ['prodact_id_cli','prodact_id_oblig_sis','prodact_nombre_cli'
+                      ,'prodact_producto','plazo','libro','LME_final','prodact_saldok_usd']
+reporte1 = df[columnas_a_agregar]
 
 
-#Ahora exportamos el data frame df a un archivo .xlsx
+
+
+
+
+
+
+#Ahora exportamos el data frame df a un archivo reporte_insumos.xlsx
 ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\reporte_insumos.xlsx'
 df.to_excel(ruta, index = False) 
