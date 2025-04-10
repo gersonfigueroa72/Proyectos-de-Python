@@ -8,6 +8,7 @@ import numpy as np
 #Iniciamos extraendo los datos necesarios ya sea de un archivo
 #csv o xlsx
 #"C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx"
+
 formato = input('Ingrese el formato del archivo (excel o csv): ')
 
 if formato == 'excel':
