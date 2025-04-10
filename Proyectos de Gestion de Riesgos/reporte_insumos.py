@@ -9,14 +9,14 @@ import numpy as np
 #csv o xlsx
 #"C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx"
 
-formato = input('Ingrese el formato del archivo (excel o csv): ')
+formato = input('Ingrese el formato del archivo (excel o csv): ').strip().lower()
 
 if formato == 'excel':
-    ruta = input('Ingrese la ruta del archivo:')
+    ruta = input('Ingrese la ruta del archivo:').strip().lower()
     df = pd.read_excel(ruta)
     print(df)
 else:
-    ruta = input('Ingrese la ruta del archivo:')
+    ruta = input('Ingrese la ruta del archivo:').strip().lower()
     df = pd.read_csv(ruta)
     print(df)
 
@@ -249,3 +249,56 @@ with pd.ExcelWriter(ruta, engine='openpyxl') as writer:
     # Exportar cada DataFrame a una hoja diferente
     df.to_excel(writer, sheet_name='Reporte Insumos', index=False)
     reporte1.to_excel(writer, sheet_name='Reporte Wil', index=False)
+
+#Ahora iniciamos el reporte de renovación
+#Llamamos las tablas necesarias
+
+#Verificar si se desea los informes de renovación
+verificar = input("Realizar informes de renovación (si/no)").strip().lower()
+if verificar == si: #usar pass para sacar del if
+    pass 
+elif verificar == no:
+    break
+else:
+    print("Entrada no válida")
+
+formato = input('Ingrese el formato del archivo (excel o csv): ').strip().lower()
+ruta1 = input()
+if formato == excel:
+    df3 = pd.read_excel('Ingrese la ruta del archivo:').strip().lower()
+elif formato == csv
+    df3 = pd.read_csv('Ingrese la ruta del archivo:').strip().lower()
+else:
+    print("Entrada no válida")
+
+#Vamos a extraer df la columna prodact_id_cliente y prodact_nombre_ejecutivo
+id_clientes1 = df["prodact_id_cliente"].copy()
+nombre_ejecutivo = df["prodact_nombre_ejecutivo"].copy()
+#Buscamos el nit, nombre cliente,  de cada cliente en la tabla grupos e integrantes
+nit = []
+nombre_cli = []
+cod_grupo = []
+nombre_grupo = []
+for i in id_clientes1:
+    buscar = df3[df3["codigo_cliente"] == i]
+    hallar_nit = buscar["nit"]
+    hallar_cliente = buscar["nombre_cliente"]
+    hallar_cod_grupo = buscar["codigo_grupo"]
+    hallar_nom_grupo = ["nombre_grupo"]
+    nit.append(hallar_nit)
+    nombre_cli.append(hallar_cliente)
+    cod_grupo.append(hallar_cod_grupo) 
+    nombre_grupo.append(hallar_nom_grupo)
+
+nit = pd.Series(nit)
+nombre_cli = pd.Series(nombre_cli)
+cod_grupo = pd.Series(cod_grupo)
+nombre_grupo = pd.Series(nombre_grupo)
+
+#Creamos el dataframe df_renov, que será el informe de renovación
+df_renov = pd.DataFrame()
+df_renov["COD. CLIENTE"] = id_clientes1
+df_renov["NIT"] = nit
+df_renov["NOMBRE CLIENTE"] = nombre_cli
+df_renov["COD. GRUPO"] = cod_grupo
+df_renov["NOMBRE GRUPO"] = nombre_grupo
