@@ -1,5 +1,5 @@
 '''
-
+Explicación
 '''
 #Importamos las librerias a utilizar
 import pandas as pd
@@ -9,16 +9,18 @@ import numpy as np
 #csv o xlsx
 #"C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx"
 
-formato = input('Ingrese el formato del archivo (excel o csv): ')
-
+#formato = input('Ingrese el formato del archivo de insumos (excel o csv): ').strip().lower()
+formato = 'excel'
 if formato == 'excel':
-    ruta = input('Ingrese la ruta del archivo:')
+    #ruta = input('Ingrese la ruta del archivo de insumos:')
+    ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx'
     df = pd.read_excel(ruta)
-    print(df)
+    #print(df)
 else:
-    ruta = input('Ingrese la ruta del archivo:')
+    #ruta = input('Ingrese la ruta del archivo de insumos:')
+    ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx'
     df = pd.read_csv(ruta)
-    print(df)
+    #print(df)
 
 #Iniciaremos eliminando columnas que no nos interesan
 
@@ -244,8 +246,9 @@ reporte1['Saldo actual'] = np.nan
 reporte1['Unidad de riesgo'] = np.nan
 
 #Ahora exportamos el data frame df a un archivo reporte_insumos.xlsx
-ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\reporte_insumos.xlsx'
-with pd.ExcelWriter(ruta, engine='openpyxl') as writer:
+if __name__ == '__main__':
+    ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\reporte_insumos.xlsx'
+    with pd.ExcelWriter(ruta, engine='openpyxl') as writer:
     # Exportar cada DataFrame a una hoja diferente
-    df.to_excel(writer, sheet_name='Reporte Insumos', index=False)
-    reporte1.to_excel(writer, sheet_name='Reporte Wil', index=False)
+        df.to_excel(writer, sheet_name='Reporte Insumos', index=False)
+        reporte1.to_excel(writer, sheet_name='Reporte Wil', index=False)
