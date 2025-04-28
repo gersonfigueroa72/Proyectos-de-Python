@@ -6,52 +6,39 @@ import numpy as np
 
 formato = 'excel'
 if formato =='excel':
-    #df = pd.read_excel(input('Ingrese la ruta del archivo Grupos e integrantes LZ 10:'))
-    df = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\reporte_insumos.xlsx')
+    df = pd.read_excel(input('Ingrese la ruta del archivo Reporte_insumos:'))
 elif formato =='csv':
-    #df = pd.read_csv(input('Ingrese la ruta del archivo Grupos e integrantes LZ 10:'))
-    df = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\reporte_insumos.xlsx')
+    df = pd.read_csv(input('Ingrese la ruta del archivo Reporte_insumos:'))
 else:
     print("Entrada no válida")
-
-#C:\\Users\\Fam. Figueroa\\Desktop\\Grupos e integrantes LZ 10.xlsx
 
 '''formato = input('Ingrese el formato del archivo Grupos e integrantes LZ 10: '
 '(excel o csv): ').strip().lower()'''
-formato = 'excel'
 if formato =='excel':
-    #df3 = pd.read_excel(input('Ingrese la ruta del archivo Grupos e integrantes LZ 10:'))
-    df3 = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\Grupos e integrantes LZ 10.xlsx')
+    df3 = pd.read_excel(input('Ingrese la ruta del archivo Grupos e integrantes LZ 10:'))
 elif formato =='csv':
-    #df3 = pd.read_csv(input('Ingrese la ruta del archivo Grupos e integrantes LZ 10:'))
-    df3 = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\Grupos e integrantes LZ 10.xlsx')
+    df3 = pd.read_csv(input('Ingrese la ruta del archivo Grupos e integrantes LZ:'))
 else:
     print("Entrada no válida")
 
-#C:\\Users\\Fam. Figueroa\\Desktop\\Ratings LZ 11.xlsx
-'''formato1 = input('Ingrese el formato del archivo Rating LZ: '
+'''formato = input('Ingrese el formato del archivo Rating LZ: '
 '(excel o csv): ').strip().lower()'''
-formato1 = 'excel'
-if formato1 =='excel':
-    #df4 = pd.read_excel(input('Ingrese la ruta del archivo Rating LZ:'))
-    df4 = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\Ratings LZ 11.xlsx')
-elif formato1 =='csv':
-    df4 = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\Ratings LZ 11.xlsx')
+if formato =='excel':
+    df4 = pd.read_excel(input('Ingrese la ruta del archivo Rating LZ:'))
+elif formato =='csv':
+    df4 = pd.read_csv(input('Ingrese la ruta del archivo Rating LZ:'))
 else:
     print("Entrada no válida")
 
-#C:
-'''formato1 = input('Ingrese el formato del archivo Reporte SIB: '
+'''formato = input('Ingrese el formato del archivo Reporte SIB: '
 '(excel o csv): ').strip().lower()'''
-formato2 = 'excel'
-if formato2 =='excel':
-    #df5 = pd.read_excel(input('Ingrese la ruta del archivo Reporte SIB LZ:'))
-    df5 = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\Reporte SIB LZ 5.xlsx',
+if formato =='excel':
+    df5 = pd.read_excel(input('Ingrese la ruta del archivo Reporte SIB LZ:'),
                         skiprows = 0, # Ajusta este número si hay filas vacías al inicio
                         header=0, # Ajusta este número para indicar qué fila contiene los nombres de columnas
                         na_values=['', ' ', 'NA', 'N/A']  # Valores a considerar como NA
                         )
-elif formato1 =='csv':
+elif formato =='csv':
     df5 = pd.read_excel('C:\\Users\\Fam. Figueroa\\Desktop\\Reporte SIB LZ 5.xlsx')
 else:
     print("Entrada no válida")
