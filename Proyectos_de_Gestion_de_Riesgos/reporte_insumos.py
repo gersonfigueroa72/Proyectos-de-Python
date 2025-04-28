@@ -5,20 +5,16 @@ Explicación
 import pandas as pd
 import numpy as np
 
-#Iniciamos extraendo los datos necesarios ya sea de un archivo
-#csv o xlsx
-#"C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx"
+#Iniciamos extraendo los datos necesarios ya sea de un archivo csv o xlsx
 
 #formato = input('Ingrese el formato del archivo de insumos (excel o csv): ').strip().lower()
 formato = 'excel'
 if formato == 'excel':
-    #ruta = input('Ingrese la ruta del archivo de insumos:')
-    ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx'
+    ruta = input('Ingrese la ruta del archivo de insumos:')
     df = pd.read_excel(ruta)
     #print(df)
 else:
-    #ruta = input('Ingrese la ruta del archivo de insumos:')
-    ruta = 'C:\\Users\\Fam. Figueroa\\Desktop\\query-impala-17328357 original.xlsx'
+    ruta = input('Ingrese la ruta del archivo de insumos:')
     df = pd.read_csv(ruta)
     #print(df)
 
