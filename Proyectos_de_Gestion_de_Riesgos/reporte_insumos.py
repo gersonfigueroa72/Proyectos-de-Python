@@ -1,5 +1,5 @@
 '''
-Explicación
+Introducir datos sin manipular
 '''
 #Importamos las librerias a utilizar
 import pandas as pd
@@ -10,11 +10,11 @@ import numpy as np
 #formato = input('Ingrese el formato del archivo de insumos (excel o csv): ').strip().lower()
 formato = 'excel'
 if formato == 'excel':
-    ruta = input('Ingrese la ruta del archivo de insumos:')
+    ruta = input('Ingrese la ruta del archivo de query impala:')
     df = pd.read_excel(ruta)
     #print(df)
 else:
-    ruta = input('Ingrese la ruta del archivo de insumos:')
+    ruta = input('Ingrese la ruta del archivo de query impala:')
     df = pd.read_csv(ruta)
     #print(df)
 
