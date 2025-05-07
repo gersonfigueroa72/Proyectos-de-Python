@@ -1,5 +1,5 @@
 '''
-Explicación
+Introducir datos sin manipular
 '''
 #Importamos las librerias a utilizar
 import pandas as pd
