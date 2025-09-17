@@ -1,6 +1,6 @@
 #En este archivo hablaremos de listas
 #Estas son estructuras de datos que nos permiten guardar varios valores, como un vector o un conjunto.
-#nombre_de_la_lista=[elem0,elem1,...], tambien podemos usar () pero mejor siempre usa []
+#nombre_de_la_lista=[elem0,elem1,...]
 lista_1=[1,5,"perro"] #el primer elemento de la lista simpre tiene el indice 0
 print(lista_1)
 print(lista_1[1])
