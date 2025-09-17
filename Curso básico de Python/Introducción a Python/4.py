@@ -2,7 +2,6 @@
 #las tuplas son listas que no se pueden modificar despues de su creación
 #tampoco permiten que busquemos entre sus elementos (index)
 #la ventaja de estas es que optimizan el codigo al ser inmutables 
-#la tupla es lo mismo que una lista pero con ()
 tupla_1=(1,2,3,4,5)
 print(tupla_1)
 tupla_2=(6,7,8)
